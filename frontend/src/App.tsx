@@ -62,9 +62,13 @@ export const App = () => {
         textAlign="center"
         sx={{ position: "sticky", top: 0, backgroundColor: "gray" }}
       >
-        <Typography variant="caption">みんなで力を合わせて</Typography>
-        <Typography variant="h3">{timeToHMS(totalSeconds)}</Typography>
-        <Typography variant="caption">
+        <Typography variant="caption" color="white">
+          みんなで力を合わせて
+        </Typography>
+        <Typography variant="h3" color="white">
+          {timeToHMS(totalSeconds)}
+        </Typography>
+        <Typography variant="caption" color="white">
           だらだらしました（不定期にリセットされます）
         </Typography>
       </Box>
@@ -94,6 +98,7 @@ export const App = () => {
             onClick={() => setIsRunning((r) => !r)}
             sx={{
               color: "darkgray",
+              fontWeight: "bold",
               backgroundColor: "white",
               outline: "none",
               boxShadow: "none",
@@ -104,8 +109,12 @@ export const App = () => {
             {isRunning ? "だらだら終了" : "だらだらする"}
           </Button>
           <Box>
-            <Typography variant="h4">{timeToHMS(localSeconds)}</Typography>
-            <Typography variant="caption">だらだらしています</Typography>
+            <Typography variant="h4" color="white">
+              {timeToHMS(localSeconds)}
+            </Typography>
+            <Typography variant="caption" color="white">
+              だらだらしています
+            </Typography>
           </Box>
         </Stack>
       </Box>
