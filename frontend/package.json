@@ -10,6 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.8",
+    "@pixi/graphics": "^7.4.3",
+    "@pixi/react": "^8.0.0-beta.25",
+    "axios": "^1.8.4",
+    "pixi.js": "^8.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
