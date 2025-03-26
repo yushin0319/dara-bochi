@@ -5,7 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = ["http://localhost:5173", "http://127.0.0.1:5173"]  # Vite開発用
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://dara-bochi.onrender.com",
+]  # Vite開発用
 
 app.add_middleware(
     CORSMiddleware,
