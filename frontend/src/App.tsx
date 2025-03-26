@@ -14,7 +14,7 @@ export const App = () => {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null!);
 
-  axios.defaults.baseURL = "http://localhost:8000";
+  axios.defaults.baseURL = "https://dara-bochi-api.onrender.com";
   axios.defaults.headers.post["Content-Type"] = "application/json";
 
   useEffect(() => {
