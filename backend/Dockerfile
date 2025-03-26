@@ -1,21 +1,26 @@
+# Pythonベースイメージ
 FROM python:3.11-slim
 
-# poetryインストール（公式手順に近いやつ）
-RUN pip install --no-cache-dir poetry
-
-# 作業ディレクトリ
+# 作業ディレクトリ作成
 WORKDIR /app
 
-# Poetryのキャッシュ有効化
-ENV POETRY_VIRTUALENVS_CREATE=false \
-    POETRY_NO_INTERACTION=1
+# poetryのインストール
+RUN pip install poetry
 
-# pyproject.toml と poetry.lock（あれば）を先にコピーして依存解決
+# Poetryの環境設定（仮想環境をグローバルに）
+ENV POETRY_VIRTUALENVS_CREATE=false \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# pyproject.tomlとpoetry.lockだけ先にコピーして依存解決（キャッシュ効かせる）
 COPY pyproject.toml poetry.lock* ./
 RUN poetry install --no-root
 
-# 残りのコードをコピー
+# アプリのコードをコピー
 COPY . .
 
-# 本番実行コマンド（開発用なら --reload）
+# 使用ポート
+EXPOSE 8000
+
+# アプリの起動コマンド（Renderの自動検出用）
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
