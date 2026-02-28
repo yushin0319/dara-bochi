@@ -16,24 +16,37 @@ FastAPI, React, PixiJS を用いたサボりを肯定するアプリです。
 
 ```
 .
-├── app
-│   ├── main.py          # API本体（FastAPI）
-├── src
-│   ├── App.tsx          # フロントエンドルート
-│   └── components
-│       └── BouncyBall.tsx   # PixiJSのボールアニメーション
-├── Dockerfile           # バックエンド用（FastAPI）
-├── poetry.lock
-└── pyproject.toml       # Poetry構成ファイル
+├── backend/
+│   ├── app/
+│   │   └── main.py          # API本体（FastAPI）
+│   ├── Dockerfile
+│   ├── poetry.lock
+│   └── pyproject.toml
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx
+│   │   └── components/
+│   │       └── BouncyBall.tsx   # PixiJSのボールアニメーション
+│   ├── package.json
+│   └── vite.config.ts
+└── README.md
 ```
 
 ## 実行
 
+### バックエンド
+
 ```bash
-uvicorn app.main:app --reload --port 8000
+cd backend && poetry install && uvicorn app.main:app --reload --port 8000
 ```
 
-フロントエンドは別途 Vite で起動（`localhost:5173`）。
+### フロントエンド
+
+```bash
+cd frontend && npm install && npm run dev
+```
+
+フロントエンドは Vite で `localhost:5173` に起動します。
 
 ## CORS
 
@@ -50,9 +63,12 @@ uvicorn app.main:app --reload --port 8000
   - FastAPI
   - Poetry 管理
 
-## Docker 構築
+## デプロイ
 
-※後日追記予定（FastAPI バックエンドの Dockerfile は準備済み）
+Render にデプロイ済みです。
+
+- **フロントエンド**: https://dara-bochi.onrender.com
+- **バックエンド API**: https://dara-bochi-api.onrender.com
 
 ## LICENSE
 
