@@ -1,5 +1,5 @@
 // src/App.tsx
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Snackbar, Stack, Typography } from "@mui/material";
 import { Application, extend } from "@pixi/react";
 import axios from "axios";
 import { Graphics } from "pixi.js";
@@ -12,6 +12,7 @@ export const App = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [localSeconds, setLocalSeconds] = useState(0);
   const [totalSeconds, setTotalSeconds] = useState(0);
+  const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null!);
 
   axios.defaults.baseURL = "https://dara-bochi-api.onrender.com";
@@ -26,8 +27,15 @@ export const App = () => {
       }, 1000);
     } else {
       if (localSeconds > 0) {
-        axios.post("/add_time", { seconds: localSeconds });
-        setLocalSeconds(0);
+        const seconds = localSeconds;
+        axios
+          .post("/add_time", { seconds })
+          .then(() => {
+            setLocalSeconds(0);
+          })
+          .catch(() => {
+            setError("時間の送信に失敗しました。再度お試しください。");
+          });
       }
     }
     return () => {
@@ -37,8 +45,12 @@ export const App = () => {
 
   useEffect(() => {
     const fetchTotal = async () => {
-      const res = await axios.get("/get_total");
-      setTotalSeconds(res.data.total_seconds);
+      try {
+        const res = await axios.get("/get_total");
+        setTotalSeconds(res.data.total_seconds);
+      } catch {
+        setError("累計時間の取得に失敗しました。");
+      }
     };
     fetchTotal();
     const interval = setInterval(fetchTotal, 3000);
@@ -56,6 +68,16 @@ export const App = () => {
 
   return (
     <Box height="100vh" width="100vw" display="flex" flexDirection="column">
+      <Snackbar
+        open={!!error}
+        autoHideDuration={6000}
+        onClose={() => setError(null)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert severity="error" onClose={() => setError(null)}>
+          {error}
+        </Alert>
+      </Snackbar>
       {/* 上部：グローバルタイマー */}
       <Box
         p={2}
