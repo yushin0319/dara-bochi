@@ -1,16 +1,9 @@
-[tool.poetry]
+[project]
 name = "backend"
 version = "0.1.0"
 description = ""
-authors = ["yushin0319 <yushin.fudo1986@gmail.com>"]
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-fastapi = "^0.128.0"
-uvicorn = "^0.34.0"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "fastapi>=0.128.0",
+    "uvicorn>=0.34.0",
+]
