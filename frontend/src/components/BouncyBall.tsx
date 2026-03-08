@@ -1,8 +1,8 @@
 // src/components/BouncyBall.tsx
 
-import { useTick } from "@pixi/react";
-import { Graphics } from "pixi.js";
-import { useEffect, useRef, useState } from "react";
+import { useTick } from '@pixi/react';
+import type { Graphics } from 'pixi.js';
+import { useEffect, useRef, useState } from 'react';
 
 export const BouncyBall = ({
   isRunning,
@@ -28,8 +28,8 @@ export const BouncyBall = ({
       }
     };
     updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
   }, [containerRef]);
 
   const floorY = canvasHeight - 20;
