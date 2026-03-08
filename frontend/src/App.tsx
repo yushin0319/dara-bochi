@@ -1,10 +1,10 @@
 // src/App.tsx
-import { Alert, Box, Button, Snackbar, Stack, Typography } from "@mui/material";
-import { Application, extend } from "@pixi/react";
-import axios from "axios";
-import { Graphics } from "pixi.js";
-import { useEffect, useRef, useState } from "react";
-import { BouncyBall } from "./components/BouncyBall";
+import { Alert, Box, Button, Snackbar, Stack, Typography } from '@mui/material';
+import { Application, extend } from '@pixi/react';
+import axios from 'axios';
+import { Graphics } from 'pixi.js';
+import { useEffect, useRef, useState } from 'react';
+import { BouncyBall } from './components/BouncyBall';
 
 extend({ Graphics });
 
@@ -15,11 +15,11 @@ export const App = () => {
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null!);
 
-  axios.defaults.baseURL = "https://dara-bochi-api.onrender.com";
-  axios.defaults.headers.post["Content-Type"] = "application/json";
+  axios.defaults.baseURL = 'https://dara-bochi-api.onrender.com';
+  axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   useEffect(() => {
-    let timer: ReturnType<typeof setInterval> | undefined = undefined;
+    let timer: ReturnType<typeof setInterval> | undefined;
 
     if (isRunning) {
       timer = setInterval(() => {
@@ -29,27 +29,27 @@ export const App = () => {
       if (localSeconds > 0) {
         const seconds = localSeconds;
         axios
-          .post("/add_time", { seconds })
+          .post('/add_time', { seconds })
           .then(() => {
             setLocalSeconds(0);
           })
           .catch(() => {
-            setError("時間の送信に失敗しました。再度お試しください。");
+            setError('時間の送信に失敗しました。再度お試しください。');
           });
       }
     }
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [isRunning]);
+  }, [isRunning, localSeconds]);
 
   useEffect(() => {
     const fetchTotal = async () => {
       try {
-        const res = await axios.get("/get_total");
+        const res = await axios.get('/get_total');
         setTotalSeconds(res.data.total_seconds);
       } catch {
-        setError("累計時間の取得に失敗しました。");
+        setError('累計時間の取得に失敗しました。');
       }
     };
     fetchTotal();
@@ -62,7 +62,7 @@ export const App = () => {
     const m = Math.floor((time % 3600) / 60);
     const s = time % 60;
     // 0埋め
-    const zp = (n: number) => n.toString().padStart(2, "0");
+    const zp = (n: number) => n.toString().padStart(2, '0');
     return `${zp(h)}:${zp(m)}:${zp(s)}`;
   };
 
@@ -72,7 +72,7 @@ export const App = () => {
         open={!!error}
         autoHideDuration={6000}
         onClose={() => setError(null)}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="error" onClose={() => setError(null)}>
           {error}
@@ -82,7 +82,7 @@ export const App = () => {
       <Box
         p={2}
         textAlign="center"
-        sx={{ position: "sticky", top: 0, backgroundColor: "gray" }}
+        sx={{ position: 'sticky', top: 0, backgroundColor: 'gray' }}
       >
         <Typography variant="caption" color="white">
           みんなで力を合わせて
@@ -106,7 +106,7 @@ export const App = () => {
       <Box
         p={2}
         textAlign="center"
-        sx={{ position: "sticky", bottom: 0, backgroundColor: "gray" }}
+        sx={{ position: 'sticky', bottom: 0, backgroundColor: 'gray' }}
       >
         <Stack
           direction="row"
@@ -119,16 +119,16 @@ export const App = () => {
             variant="outlined"
             onClick={() => setIsRunning((r) => !r)}
             sx={{
-              color: "darkgray",
-              fontWeight: "bold",
-              backgroundColor: "white",
-              outline: "none",
-              boxShadow: "none",
-              borderColor: "white",
-              "&:focus": { outline: "none" },
+              color: 'darkgray',
+              fontWeight: 'bold',
+              backgroundColor: 'white',
+              outline: 'none',
+              boxShadow: 'none',
+              borderColor: 'white',
+              '&:focus': { outline: 'none' },
             }}
           >
-            {isRunning ? "だらだら終了" : "だらだらする"}
+            {isRunning ? 'だらだら終了' : 'だらだらする'}
           </Button>
           <Box>
             <Typography variant="h4" color="white">
