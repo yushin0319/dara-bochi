@@ -1,0 +1,15 @@
+{
+  "name": "dara-bochi",
+  "private": true,
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
+  },
+  "lint-staged": {
+    "frontend/**/*.{js,ts,jsx,tsx,css,json}": "biome check --write --no-errors-on-unmatched"
+  }
+}
