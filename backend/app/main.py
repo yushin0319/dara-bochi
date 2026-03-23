@@ -1,7 +1,7 @@
 import os
 
 from fastapi import FastAPI, Request
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -23,7 +23,7 @@ app.state.total_seconds = 0
 
 
 class TimeData(BaseModel):
-    seconds: int
+    seconds: int = Field(ge=0, le=86400)
 
 
 @app.post("/add_time")
