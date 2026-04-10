@@ -67,7 +67,14 @@ export const App = () => {
   };
 
   return (
-    <Box height="100vh" width="100vw" display="flex" flexDirection="column">
+    <Box
+      sx={{
+        height: '100vh',
+        width: '100vw',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Snackbar
         open={!!error}
         autoHideDuration={6000}
@@ -80,9 +87,13 @@ export const App = () => {
       </Snackbar>
       {/* 上部：グローバルタイマー */}
       <Box
-        p={2}
-        textAlign="center"
-        sx={{ position: 'sticky', top: 0, backgroundColor: 'gray' }}
+        sx={{
+          p: 2,
+          textAlign: 'center',
+          position: 'sticky',
+          top: 0,
+          backgroundColor: 'gray',
+        }}
       >
         <Typography variant="caption" color="white">
           みんなで力を合わせて
@@ -96,7 +107,7 @@ export const App = () => {
       </Box>
 
       {/* 中央：Pixi canvasだけ */}
-      <Box flexGrow={1} ref={containerRef}>
+      <Box sx={{ flexGrow: 1 }} ref={containerRef}>
         <Application resizeTo={containerRef} backgroundColor={0xeeeeee}>
           <BouncyBall isRunning={isRunning} containerRef={containerRef} />
         </Application>
@@ -104,15 +115,18 @@ export const App = () => {
 
       {/* 下部：ローカルタイマーとボタン */}
       <Box
-        p={2}
-        textAlign="center"
-        sx={{ position: 'sticky', bottom: 0, backgroundColor: 'gray' }}
+        sx={{
+          p: 2,
+          textAlign: 'center',
+          position: 'sticky',
+          bottom: 0,
+          backgroundColor: 'gray',
+        }}
       >
         <Stack
           direction="row"
-          justifyContent="space-around"
-          alignItems="center"
           spacing={2}
+          sx={{ justifyContent: 'space-around', alignItems: 'center' }}
         >
           <Button
             size="large"
