@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^7.0.0",
+    "@mui/material": "^9.0.0",
     "@pixi/graphics": "^7.4.3",
     "@pixi/react": "^8.0.0-beta.25",
     "axios": "^1.15.0",
@@ -25,7 +25,11 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^6.0.1",
+    "lint-staged": "^16.4.0",
     "typescript": "~6.0.2",
     "vite": "^8.0.8"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,jsx,tsx,css,json}": "biome check --write --no-errors-on-unmatched"
   }
 }
