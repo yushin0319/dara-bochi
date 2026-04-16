@@ -16,7 +16,7 @@
     "@pixi/graphics": "^7.4.3",
     "@pixi/react": "^8.0.0-beta.25",
     "axios": "^1.15.0",
-    "pixi.js": "^8.17.1",
+    "pixi.js": "^8.18.1",
     "react": "^19.0.0",
     "react-dom": "^19.2.5"
   },
