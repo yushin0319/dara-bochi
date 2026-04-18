@@ -2,10 +2,18 @@ import os
 
 from fastapi import FastAPI, Request
 from pydantic import BaseModel, Field
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# 世界累計への悪意ある加算を抑止（IPベース、10回/分）
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 _default_origins = "http://localhost:5173,http://127.0.0.1:5173,https://dara-bochi.onrender.com"
 origins = os.environ.get("ALLOWED_ORIGINS", _default_origins).split(",")
@@ -27,6 +35,7 @@ class TimeData(BaseModel):
 
 
 @app.post("/add_time")
+@limiter.limit("10/minute")
 def add_time(data: TimeData, request: Request):
     request.app.state.total_seconds += data.seconds
     return {"message": "added", "new_total": request.app.state.total_seconds}
