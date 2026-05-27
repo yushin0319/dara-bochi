@@ -4,9 +4,9 @@
 
 ## スタック
 
-- Backend: Python 3.11 / FastAPI / slowapi（レート制限）/ uvicorn
-- Frontend: TypeScript / React 19 / Vite 8 / MUI v9 / PixiJS 8（Canvas アニメ）
-- デプロイ: Render（BE: Web Service / FE: Static Site）
+- Backend: Python 3.11 / FastAPI / slowapi（レート制限）/ uvicorn（uv 管理）
+- Frontend: TypeScript / React 19 / Vite 8 / MUI v9 / PixiJS 8（Canvas アニメ） / Biome / Husky + lint-staged
+- デプロイ: Render（BE: Docker / FE: Static Site）
 
 ## 構成
 
@@ -44,8 +44,8 @@ npm run lint         # Biome
 
 ## デプロイ
 
-- Render が GitHub push を検知して自動デプロイ
-- CI: `.github/workflows/test.yml` / PR レビュー: `gemini-review.yml`
+- Render が GitHub push を検知して自動デプロイ（BE は `backend/Dockerfile` 経由の Docker コンテナ）
+- CI: `.github/workflows/ci.yml` + `codeql.yml` / PR レビュー: `gemini-review.yml` / Dependabot patch/minor は `dependabot-automerge.yml`
 
 ## 運用ルール
 
