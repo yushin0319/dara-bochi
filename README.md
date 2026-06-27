@@ -34,12 +34,12 @@ cd backend
 uv sync
 uv run uvicorn app.main:app --reload --port 8000
 
-# Frontend (npm)
+# Frontend (Bun)
 cd frontend
-npm install
-npm run dev          # :5173
-npm run build
-npm run lint         # Biome
+bun install
+bun run dev          # :5173
+bun run build
+bun run lint         # Biome
 ```
 
 ## デプロイ
