@@ -4,8 +4,8 @@
 
 ## スタック
 
-- Backend: Python 3.11 / FastAPI / slowapi（レート制限）/ uvicorn（uv 管理）
-- Frontend: TypeScript / React 19 / Vite 8 / MUI v9 / PixiJS 8（Canvas アニメ） / Biome / Husky + lint-staged
+- Backend: Python 3.11–3.12 / FastAPI / slowapi（レート制限）/ uvicorn（uv 管理）
+- Frontend: TypeScript 7 / React 19 / Vite 8 / MUI v9 / PixiJS 8（`pixi.js` + `@pixi/react`、Canvas アニメ）/ axios / Biome v2 / Husky + lint-staged
 - デプロイ: Render（BE: Docker / FE: Static Site）
 
 ## 構成
