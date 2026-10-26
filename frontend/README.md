@@ -11,4 +11,5 @@ bun install
 bun run dev          # Vite 開発サーバー（:5173）
 bun run build        # tsc -b && vite build
 bun run lint         # biome check .
+bun run preview      # vite preview（build 結果の確認）
 ```

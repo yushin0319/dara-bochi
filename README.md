@@ -24,7 +24,7 @@ frontend/
 
 - `POST /add_time` — `{ seconds: int (0-86400) }` → `{ message, new_total }`、IP 単位 10 req/min（slowapi）
 - `GET /get_total` — `{ total_seconds: int }`
-- CORS は `localhost:5173` + Render 本番 URL を許可
+- CORS は既定で `http://localhost:5173` / `http://127.0.0.1:5173` / `https://dara-bochi.onrender.com` を許可。環境変数 `ALLOWED_ORIGINS`（カンマ区切り）で上書きできる
 
 ## 開発
 
@@ -40,12 +40,18 @@ bun install
 bun run dev          # :5173
 bun run build
 bun run lint         # Biome
+bun run preview      # build 結果のプレビュー
+
+# Git フック（ルートで 1 回）
+bun install          # prepare で Husky を有効化 → pre-commit で frontend の lint-staged（Biome）
 ```
+
+- フロントの API 接続先は `frontend/src/App.tsx` で `https://dara-bochi-api.onrender.com` に固定されている。ローカルの BE（:8000）に向けるにはここを書き換える
 
 ## デプロイ
 
 - Render が GitHub push を検知して自動デプロイ（BE は `backend/Dockerfile` 経由の Docker コンテナ）
-- CI: `.github/workflows/ci.yml` + `codeql.yml` / PR レビュー: `gemini-review.yml` / Dependabot patch/minor は `dependabot-automerge.yml`
+- CI: `.github/workflows/ci.yml`（frontend の lint / `tsc -b` / build。BE のテストは無し）+ `codeql.yml`（JS/TS・Python） / PR レビュー: `gemini-review.yml` / Dependabot patch/minor は `dependabot-automerge.yml`
 
 ## 運用ルール
 
